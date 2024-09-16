@@ -1,6 +1,8 @@
 services:
   nginx:
-    image: requirements/nginx/dockerfile
+    build:
+      context: ./requirements/nginx
+      dockerfile: Dockerfile
     ports:
       - "8443:443"
     volumes:
@@ -9,30 +11,39 @@ services:
       - inception
     depends_on:
       - wordpress
+    container_name: nginx_container
+    restart: unless-stopped
   mariadb:
-    image: requirements/mariadb/dockerfile
     build:
+      context: ./requirements/mariadb
+      dockerfile: Dockerfile
       args:
          MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
          MYSQL_USER: ${MYSQL_USER}
          MYSQL_PASSWORD: ${MYSQL_PASSWORD}
          WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST}
     volumes:
-      - ./mariadb/data:/var/lib/mysql
+      - mariadb_data:/var/lib/mysql
     networks:
       - inception
     expose:
       - "3306"
+    container_name: mariadb_container
+    restart: unless-stopped
   wordpress:
-    image: requirements/wordpress/dockerfile
+    build:
+      context: ./requirements/wordpress
+      dockerfile: Dockerfile
     expose:
       - "9000"
     volumes:
-      - ./wordpress/html:/var/www/html
+      - wordpress_data:/var/www/html
     depends_on:
       - mariadb
     networks:
       - inception
+    container_name: wordpress_container
+    restart: unless-stopped
 
 networks:
   inception:
@@ -41,5 +52,13 @@ networks:
 volumes:
   wordpress_data:
     driver: local
+    driver_opts:
+      type: none
+      device: ~/data/wordpress
+      o: bind
   mariadb_data:
     driver: local
+    driver_opts:
+      type: none
+      device: ~/data/mariadb
+      o: bind

@@ -1,12 +1,12 @@
-export COMPOSE_FILE = srcs/docker-compose.yml
-
 all:
-	docker-compose up --build -d
+	docker-compose -f ./srcs/docker-compose.yml up --build
 
-stop:
-	docker stop $(shell docker ps -q)
+vol:
+	docker-compose -f ./srcs/docker-compose.yml down --volumes
 
-clean:
-	docker stop $(shell docker ps -q)
-	docker rm $(shell docker ps -a -q)
-	docker rmi $(shell docker images -q)
+down:
+	docker-compose -f ./srcs/docker-compose.yml down
+
+re: down vol all
+
+.PHONY: all down vol re
