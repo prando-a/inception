@@ -1,0 +1,13 @@
+from debian:bullseye
+
+ARG MYSQL_ROOT_PASSWORD
+ARG MYSQL_USER
+ARG MYSQL_PASSWORD
+ARG WORDPRESS_DB_HOST
+
+RUN apt-get update && apt-get install -y mariadb-server
+
+RUN service mysql start && mysql -u root -e "CREATE DATABASE ${WORDPRESS_DB_HOST}; 
+											CREATE USER '${MYSQL_USER}'@'localhost' IDENTIFIED BY 'password';
+											GRANT ALL PRIVILEGES ON *.* TO 'newuser'@'localhost' WITH GRANT OPTION;
+											FLUSH PRIVILEGES;"
