@@ -14,13 +14,14 @@ RUN chown -R mysql:mysql /var/run/mysqld/
 RUN mkdir -p /etc/mysql
 COPY ./config/my.cnf /etc/mysql/my.cnf
 
-# Escribir el script de inicialización SQL directamente en el Dockerfile
 RUN service mariadb start && \
-    echo "CREATE DATABASE IF NOT EXISTS ${WORDPRESS_DB_HOST} ;" > msql_db.sql && \
-    echo "CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}' ;" >> msql_db.sql && \
-    echo "GRANT ALL PRIVILEGES ON ${WORDPRESS_DB_HOST}.* TO '${MYSQL_USER}'@'%' ;" >> msql_db.sql && \
+    echo "CREATE DATABASE IF NOT EXISTS mariadb ;" > msql_db.sql && \
+    echo "CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}' ;" >> msql_db.sql && \
+    echo "GRANT ALL PRIVILEGES ON ${MYSQL_ROOT_PASSWORD}.* TO '${MYSQL_USER}'@'%' ;" >> msql_db.sql && \
     echo "FLUSH PRIVILEGES;" >> msql_db.sql && \
     echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}' ;" >> msql_db.sql && \
     mariadb < msql_db.sql
+
+
 
 CMD ["mysqld"]
