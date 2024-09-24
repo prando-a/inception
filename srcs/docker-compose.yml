@@ -38,9 +38,9 @@ services:
       dockerfile: Dockerfile
     environment:
       WP_DB_HOST: ${WP_DB_HOST}
-      WP_DB_NAME: ${WP_DB_NAME}
+      WP_DB_NAME: ${DB_NAME}
       WP_DB_USER: ${WP_DB_USER}
-      WP_DB_PASSWORD: ${WP_DB_PASS}
+      WP_DB_PASSWORD: ${DB_PASS}
     expose:
       - "9000"
     volumes:
