@@ -7,12 +7,6 @@ ARG WP_DB_USER
 ARG DB_PASS
 ARG DOMAIN_NAME
 
-WP_DB_HOST: ${WP_DB_HOST}
-      WP_DB_NAME: ${DB_NAME}
-      WP_DB_USER: ${WP_DB_USER}
-      WP_DB_PASSWORD: ${DB_PASS}
-      DOMAIN_NAME: ${DOMAIN_NAME}
-
 # Actualiza el sistema e instala dependencias necesarias
 RUN apt-get update && apt-get install -y \
     php7.4-fpm \
