@@ -28,5 +28,8 @@ RUN service mariadb start && \
     mariadb < msql_db.sql
 
 # Iniciar el servidor de MariaDB
+
+EXPOSE 3306
+
 CMD ["mysqld"]
 

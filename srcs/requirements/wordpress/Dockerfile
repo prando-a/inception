@@ -36,7 +36,7 @@ COPY ./config/setup-wp.sh /setup-wp.sh
 RUN chmod +x /setup-wp.sh
 
 # Expone el puerto 80
-EXPOSE 80
+EXPOSE 9000
 
 # Crea usuario y grupo para permisos correctos
 RUN useradd prando-a && groupadd wp_group && usermod -aG wp_group prando-a
