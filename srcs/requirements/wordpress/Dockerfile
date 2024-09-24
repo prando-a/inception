@@ -3,11 +3,11 @@ FROM debian:bullseye
 
 # Actualiza el sistema e instala dependencias necesarias
 RUN apt-get update && apt-get install -y \
-	php7.4-fpm \
-	php7.4-mysql \
-	php7.4-curl \
-	php7.4-gd \
-	php7.4-mbstring \
+    php7.4-fpm \
+    php7.4-mysql \
+    php7.4-curl \
+    php7.4-gd \
+    php7.4-mbstring \
     curl \
     unzip \
     sudo \
@@ -30,7 +30,6 @@ RUN rm latest.zip
 RUN chown -R www-data:www-data /var/www/html/wordpress
 RUN mv /var/www/html/wordpress/* /var/www/html/
 RUN rmdir /var/www/html/wordpress
-RUN wp config create --path=var/www/html --dbname=$WP_DB_NAME --dbuser=$WP_DB_USER --dbpass=$WP_DB_PASSWORD --dbhost=$WP_DB_HOST  --allow-root
 
 # Copia el script de configuración
 COPY ./config/setup-wp.sh /setup-wp.sh
@@ -39,6 +38,7 @@ RUN chmod +x /setup-wp.sh
 # Expone el puerto 80
 EXPOSE 80
 
+# Crea usuario y grupo para permisos correctos
 RUN useradd prando-a && groupadd wp_group && usermod -aG wp_group prando-a
 
 # Inicia Nginx y PHP-FPM

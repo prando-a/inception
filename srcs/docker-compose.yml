@@ -36,6 +36,11 @@ services:
     build:
       context: ./requirements/wordpress
       dockerfile: Dockerfile
+    environment:
+      WP_DB_HOST: ${WP_DB_HOST}
+      WP_DB_NAME: ${WP_DB_NAME}
+      WP_DB_USER: ${WP_DB_USER}
+      WP_DB_PASSWORD: ${WP_DB_PASS}
     expose:
       - "9000"
     volumes:
