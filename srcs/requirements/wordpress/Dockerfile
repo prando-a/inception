@@ -41,5 +41,5 @@ EXPOSE 9000
 # Crea usuario y grupo para permisos correctos
 RUN useradd prando-a && groupadd wp_group && usermod -aG wp_group prando-a
 
-# Inicia Nginx y PHP-FPM
+# Inicia PHP-FPM
 CMD /setup-wp.sh

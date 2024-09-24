@@ -41,6 +41,7 @@ services:
       WP_DB_NAME: ${DB_NAME}
       WP_DB_USER: ${WP_DB_USER}
       WP_DB_PASSWORD: ${DB_PASS}
+      DOMAIN_NAME: ${DOMAIN_NAME}
     expose:
       - "9000"
     volumes:
