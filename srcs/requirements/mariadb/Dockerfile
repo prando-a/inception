@@ -1,9 +1,9 @@
 from debian:bullseye
 
-ARG MYSQL_ROOT_PASSWORD
-ARG MYSQL_USER
-ARG MYSQL_PASSWORD
-ARG WORDPRESS_DB_HOST
+ARG DB_ROOT_PASS
+ARG DB_USER
+ARG DB_PASS
+ARG WP_DB_HOST
 
 RUN apt-get update && apt-get install -y mariadb-server
 
@@ -16,10 +16,10 @@ COPY ./config/my.cnf /etc/mysql/my.cnf
 
 RUN service mariadb start && \
     echo "CREATE DATABASE IF NOT EXISTS mariadb ;" > msql_db.sql && \
-    echo "CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}' ;" >> msql_db.sql && \
-    echo "GRANT ALL PRIVILEGES ON ${MYSQL_ROOT_PASSWORD}.* TO '${MYSQL_USER}'@'%' ;" >> msql_db.sql && \
+    echo "CREATE USER IF NOT EXISTS '${DB_USER}'@'%' IDENTIFIED BY '${DB_ROOT_PASS}' ;" >> msql_db.sql && \
+    echo "GRANT ALL PRIVILEGES ON ${DB_ROOT_PASS}.* TO '${DB_USER}'@'%' ;" >> msql_db.sql && \
     echo "FLUSH PRIVILEGES;" >> msql_db.sql && \
-    echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}' ;" >> msql_db.sql && \
+    echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '${DB_ROOT_PASS}' ;" >> msql_db.sql && \
     mariadb < msql_db.sql
 
 

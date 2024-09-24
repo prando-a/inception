@@ -30,7 +30,7 @@ RUN curl -O https://wordpress.org/latest.zip \
     && chown -R www-data:www-data /var/www/html/wordpress \
     && mv /var/www/html/wordpress/* /var/www/html/ \
     && rmdir /var/www/html/wordpress \
-    && wp config create --path=var/www/html --dbname=$WORDPRESS_DB_NAME --dbuser=$WORDPRESS_DB_USER --dbpass=$WORDPRESS_DB_PASSWORD --dbhost=$WORDPRESS_DB_HOST  --allow-root
+    && wp config create --path=var/www/html --dbname=$WP_DB_NAME --dbuser=$WP_DB_USER --dbpass=$WP_DB_PASSWORD --dbhost=$WP_DB_HOST  --allow-root
 
 # Copia el script de configuración
 COPY ./config/setup-wp.sh /setup-wp.sh
