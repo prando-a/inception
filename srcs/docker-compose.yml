@@ -19,10 +19,10 @@ services:
       context: ./requirements/mariadb
       dockerfile: Dockerfile
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-      WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST}
+      DB_NAME: ${DB_NAME}
+      DB_ROOT_PASS: ${DB_ROOT_PASS}
+      DB_USER: ${DB_USER}
+      DB_PASS: ${DB_PASS}
     volumes:
       - mariadb_data:/var/lib/mysql
     networks:
