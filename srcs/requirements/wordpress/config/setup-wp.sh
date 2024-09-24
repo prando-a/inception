@@ -9,7 +9,7 @@ done
 # Crea el archivo wp-config.php si no existe
 if [ ! -f /var/www/html/wp-config.php ]; then
     echo "Creando wp-config.php..."
-    wp config create --path=/var/www/html --dbname=${WP_DB_NAME} --dbuser=${WP_DB_USER} --dbpass=${WP_DB_PASS} --dbhost=${WP_DB_HOST} --allow-root
+    wp config create --path=/var/www/html --dbname=${DB_NAME} --dbuser=${WP_DB_USER} --dbpass=${WP_DB_PASS} --dbhost=${WP_DB_HOST} --allow-root
 fi
 
 # Inicia PHP-FPM
