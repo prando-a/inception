@@ -7,11 +7,11 @@ sleep 10
 echo "Creando wp-config.php..." $DB_USER $DB_PASS $DB_NAME
 rm -rf /var/www/html/wp-config.php
 mkdir -p /var/www/html
-wp config create --path=/var/www/html --dbname=${DB_NAME} --dbuser=${DB_USER} --dbpass=${DB_PASS} --dbhost=${DB_NAME} --allow-root
+wp config create --path=/var/www/html --dbname=$DB_NAME --dbuser=$DB_USER --dbpass=$DB_PASS --dbhost=$DB_NAME --allow-root
 
 
 echo "Instalando WordPress..."
-wp core install --path=/var/www/html --url=${DOMAIN_NAME} --title=${hola} --admin_user=${DB_USER} --admin_password=${DB_PASS} --admin_email=${prando-a@student.42malaga.com} --allow-root
+wp core install --path=/var/www/html --url=$DOMAIN_NAME --title=hola --admin_user=$DB_USER --admin_password=$DB_PASS --admin_email=prando-a@student.42malaga.com --allow-root
 
 # Inicia PHP-FPM
 echo "Iniciando PHP-FPM..."
