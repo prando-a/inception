@@ -42,4 +42,4 @@ EXPOSE 9000
 RUN useradd prando-a && groupadd wp_group && usermod -aG wp_group prando-a
 
 # Inicia PHP-FPM
-CMD /setup-wp.sh
+CMD ["/setup-wp.sh"]
