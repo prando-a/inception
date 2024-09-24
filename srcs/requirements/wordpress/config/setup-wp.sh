@@ -4,7 +4,7 @@
 
 # Crea el archivo wp-config.php si no existe
 sleep 10
-echo "Creando wp-config.php..." ${DB_NAME} ${DB_NAME} ${DB_NAME}
+echo "Creando wp-config.php..." $DB_USER $DB_PASS $DB_NAME
 rm -rf /var/www/html/wp-config.php
 mkdir -p /var/www/html
 wp config create --path=/var/www/html --dbname=${DB_NAME} --dbuser=${DB_USER} --dbpass=${DB_PASS} --dbhost=${DB_NAME} --allow-root
