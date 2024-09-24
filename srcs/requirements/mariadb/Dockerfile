@@ -1,10 +1,10 @@
 FROM debian:bullseye
 
 # Definir variables de entorno
-ENV DB_NAME=${DB_NAME}
-ENV DB_ROOT_PASS=${DB_ROOT_PASS}
-ENV DB_USER=${DB_USER}
-ENV DB_PASS=${DB_PASS}
+ARG DB_NAME
+ARG DB_ROOT_PASS
+ARG DB_USER
+ARG DB_PASS
 
 # Instalar MariaDB
 RUN apt-get update && apt-get install -y mariadb-server
