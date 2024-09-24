@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Espera a que MariaDB esté listo
-until mysql -h"${WP_DB_HOST}" -u"${WP_DB_USER}" -p"${WP_DB_PASS}" -e 'show databases;' > /dev/null 2>&1; do
+until mysql -h"${DB_NAME}" -u"${DB_USER}" -p"${DB_PASS}" -e 'show databases;' > /dev/null 2>&1; do
     echo "Esperando a que MariaDB esté listo..."
     sleep 5
 done
@@ -9,7 +9,7 @@ done
 # Crea el archivo wp-config.php si no existe
 if [ ! -f /var/www/html/wp-config.php ]; then
     echo "Creando wp-config.php..."
-    wp config create --path=/var/www/html --dbname=${DB_NAME} --dbuser=${WP_DB_USER} --dbpass=${WP_DB_PASS} --dbhost=${WP_DB_HOST} --allow-root
+    wp config create --path=/var/www/html --dbname=${DB_NAME} --dbuser=${DB_USER} --dbpass=${DB_PASS} --dbhost=${DB_NAME} --allow-root
 fi
 
 # Inicia PHP-FPM
