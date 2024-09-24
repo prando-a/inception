@@ -7,7 +7,7 @@ sleep 10
 echo "Creando wp-config.php..." $DB_USER $DB_PASS $DB_NAME
 rm -rf /var/www/html/wp-config.php
 mkdir -p /var/www/html
-wp config create --path=/var/www/html --dbname=$DB_NAME --dbuser=$DB_USER --dbpass=$DB_PASS --dbhost=$DB_NAME --allow-root
+wp config create --path=/var/www/html --dbname=$DB_NAME --dbuser=$DB_USER --dbpass=$DB_PASS --dbhost=$WP_DB_HOST --allow-root
 
 
 echo "Instalando WordPress..."
