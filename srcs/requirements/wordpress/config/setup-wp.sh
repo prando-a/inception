@@ -1,10 +1,6 @@
 #!/bin/bash
 
 # Espera a que MariaDB esté listo
-until mysql -h"${DB_NAME}" -u"${DB_USER}" -p"${DB_PASS}" -e 'show databases;' > /dev/null 2>&1; do
-    echo "Esperando a que MariaDB esté listo..."
-    sleep 5
-done
 
 # Crea el archivo wp-config.php si no existe
 if [ ! -f /var/www/html/wp-config.php ]; then
