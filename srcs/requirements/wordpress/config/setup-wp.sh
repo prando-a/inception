@@ -22,8 +22,6 @@ chmod +x wp-cli.phar
 
 mv wp-cli.phar /usr/local/bin/wp
 
-wp core install --allow-root --url=$DB_NAME --title=NekaWeb --admin_user=$DB_NAME --admin_password=$ADMIN_PASS_WP --admin_email=$ADMIN_EMAIL_WP --skip-email --path=/var/www/html/wordpress
-
-wp user create --allow-root $NEW_USER_WP $WPUSER_EMAIL --user_pass=$WPUSER_PASS --path=/var/www/html/wordpress --url=$DOMINIO_NAME
+wp core install --allow-root --url=$DB_NAME --title=NekaWeb --admin_user=$DB_USER --admin_password=$DB_ROOT_PASS --admin_email=$WP_ADMIN_MAIL --skip-email --path=/var/www/html/wordpress
 
 /usr/sbin/php-fpm7.4 -F
