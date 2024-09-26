@@ -1,19 +1,29 @@
-#!/bin/bash
+#!/bin/sh
 
-# Espera a que MariaDB esté listo
+mkdir -p /run/php
 
-# Crea el archivo wp-config.php si no existe
-sleep 10
-echo "Creando wp-config.php..." $DB_USER $DB_PASS $DB_NAME
-rm -rf /var/www/html/wp-config.php
-mkdir -p /var/www/html
-wp config create --path=/var/www/html --dbname=mariadb --dbuser=root --dbpass=duracomomiverdura --dbhost=mariadb_container --allow-root
+chown -R www-data.www-data /var/www/html/wordpress
 
+chmod -R 755 /var/www/html/wordpress
 
-echo "Instalando WordPress..."
-wp core install --path=/var/www/html --url=$DOMAIN_NAME --title=hola --admin_user=$DB_USER --admin_password=$DB_PASS --admin_email=prando-a@student.42malaga.com --allow-root
+sed -i 's#listen = /run/php/php7.4-fpm.sock#listen = wordpress:9000#g' /etc/php/7.4/fpm/pool.d/www.conf
 
-# Inicia PHP-FPM
-echo "Iniciando PHP-FPM..."
-php-fpm7.4 -y /etc/php/7.4/fpm/php-fpm.conf -F 
+mv /var/www/html/wordpress/wp-config-sample.php /var/www/html/wordpress/wp-config.php
 
+sed -i "s/database_name_here/$MARIA_DATABASE/" /var/www/html/wordpress/wp-config.php
+sed -i "s/username_here/$MARIA_USER/" /var/www/html/wordpress/wp-config.php
+sed -i "s/password_here/$MARIA_PASS/" /var/www/html/wordpress/wp-config.php
+sed -i "s/put your unique phrase here/$PHRASE/" /var/www/html/wordpress/wp-config.php
+sed -i "s/localhost/mariadb:3306/" /var/www/html/wordpress/wp-config.php
+
+wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+
+chmod +x wp-cli.phar
+
+mv wp-cli.phar /usr/local/bin/wp
+
+wp core install --allow-root --url=$DB_NAME --title=NekaWeb --admin_user=$DB_NAME --admin_password=$ADMIN_PASS_WP --admin_email=$ADMIN_EMAIL_WP --skip-email --path=/var/www/html/wordpress
+
+wp user create --allow-root $NEW_USER_WP $WPUSER_EMAIL --user_pass=$WPUSER_PASS --path=/var/www/html/wordpress --url=$DOMINIO_NAME
+
+/usr/sbin/php-fpm7.4 -F

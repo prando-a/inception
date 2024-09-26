@@ -1,51 +1,18 @@
-# Usa Ubuntu como imagen base
 FROM debian:bullseye
 
-ARG WP_DB_HOST
-ARG DB_NAME
-ARG WP_DB_USER
-ARG DB_PASS
-ARG DOMAIN_NAME
-
-# Actualiza el sistema e instala dependencias necesarias
-RUN apt-get update && apt-get install -y \
-    php7.4-fpm \
-    php7.4-mysql \
-    php7.4-curl \
-    php7.4-gd \
-    php7.4-mbstring \
-    curl \
-    unzip \
-    sudo \
-    && rm -rf /var/lib/apt/lists/*
-
-# Instala WP-CLI
-RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
-    && chmod +x wp-cli.phar \
-    && mv wp-cli.phar /usr/local/bin/wp
-
-# Configura PHP
-COPY config/php-fpm.conf /etc/php/7.4/fpm/php-fpm.conf
-
 RUN mkdir -p /var/www/html
+RUN apt-get -y update
+RUN apt-get -y upgrade
+RUN apt-get -y install php php-mysql php-fpm
+RUN apt-get -y install mariadb-client
+RUN apt-get -y install wget tar
 
-# Descarga e instala WordPress
-RUN curl -O https://wordpress.org/latest.zip
-RUN unzip latest.zip -d /var/www/html
-RUN rm latest.zip
-RUN chown -R www-data:www-data /var/www/html/wordpress
-RUN mv /var/www/html/wordpress/* /var/www/html/
-RUN rmdir /var/www/html/wordpress
+RUN wget -O /tmp/wordpress.tar.gz https://wordpress.org/latest.tar.gz
+RUN tar -xzf /tmp/wordpress.tar.gz -C /var/www/html
 
-# Copia el script de configuración
-COPY ./config/setup-wp.sh /setup-wp.sh
-RUN chmod +x /setup-wp.sh
+COPY /tools/wordpress.sh .
 
-# Expone el puerto 80
 EXPOSE 9000
-
-# Crea usuario y grupo para permisos correctos
-RUN useradd prando-a && groupadd wp_group && usermod -aG wp_group prando-a
 
 # Inicia PHP-FPM
 CMD ["/setup-wp.sh"]
