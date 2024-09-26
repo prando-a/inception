@@ -10,7 +10,7 @@ RUN apt-get -y install wget tar
 RUN wget -O /tmp/wordpress.tar.gz https://wordpress.org/latest.tar.gz
 RUN tar -xzf /tmp/wordpress.tar.gz -C /var/www/html
 
-COPY /tools/wordpress.sh .
+COPY /config/setup-wp.sh .
 
 EXPOSE 9000
 
