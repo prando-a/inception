@@ -22,6 +22,10 @@ chmod +x wp-cli.phar
 
 mv wp-cli.phar /usr/local/bin/wp
 
+if [ ! -f /var/www/html/wordpress/wp-load.php ]; then
+    wp core download --allow-root --path=/var/www/html/wordpress
+fi
+
 wp core install --allow-root --url=$DB_NAME --title=NekaWeb --admin_user=$DB_USER --admin_password=$DB_ROOT_PASS --admin_email=$WP_ADMIN_MAIL --skip-email --path=/var/www/html/wordpress
 
 /usr/sbin/php-fpm7.4 -F
