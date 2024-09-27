@@ -18,7 +18,7 @@ echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '${DB_ROOT_PASS}' ;" >> msql_d
 mariadb < msql_db.sql
 
 sleep 10
-echo "[DEBUB]: msql_db.sql content:"
+echo "[DEBUG]: msql_db.sql content:"
 echo "--------------------------"
 cat msql_db.sql
 echo "--------------------------"
