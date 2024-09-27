@@ -13,6 +13,8 @@ echo "FLUSH PRIVILEGES;" >> msql_db.sql && \
 echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '${DB_ROOT_PASS}' ;" >> msql_db.sql && \
 mariadb < msql_db.sql
 
+cat msql_db.sql
+
 chmod 777 msql_db.sql
 mv msql_db.sql /run/mysqld/msql_db.sql
 chown -R mysql:root /var/run/mysqld
