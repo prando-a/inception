@@ -15,8 +15,10 @@ RUN mkdir -p /var/run/mysqld/
 RUN chown -R mysql:mysql /var/run/mysqld/
 RUN mkdir -p /etc/mysql
 
+EXPOSE 3306
+
 # Copiar configuración personalizada de MariaDB
-COPY ./config/my.cnf /etc/mysql/my.cnf
+COPY ./config/my.cnf /etc/mysql/maria.conf.d
 
 # Inicializar la base de datos
 RUN service mariadb start && \
@@ -27,9 +29,10 @@ RUN service mariadb start && \
     echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '${DB_ROOT_PASS}' ;" >> msql_db.sql && \
     mariadb < msql_db.sql
 
-# Iniciar el servidor de MariaDB
+RUN chmod 777 init.sql
+RUN mv init.sql /run/mysqld/init.sql
+RUN chown -R mysql:root /var/run/mysqld
 
-EXPOSE 3306
 
-CMD ["mysqld"]
+CMD ["mariadbd", "--user=mysql", "--init-file=/run/mysqld/init.sql"]
 
