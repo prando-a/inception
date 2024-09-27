@@ -9,6 +9,7 @@ vol:
 
 down:
 	sudo docker-compose -f ./srcs/docker-compose.yml down
+	docker-compose up -d
 
 re: down vol all
 
