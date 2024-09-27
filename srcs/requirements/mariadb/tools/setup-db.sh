@@ -1,7 +1,7 @@
 #!/bin/sh
 
 service mariadb start && \
-echo "CREATE DATABASE IF NOT EXISTS mariadbs ;" > msql_db.sql && \
+echo "CREATE DATABASE IF NOT EXISTS mariadb ;" > msql_db.sql && \
 echo "CREATE USER IF NOT EXISTS '${DB_USER}'@'%' IDENTIFIED BY '${DB_PASS}' ;" >> msql_db.sql && \
 echo "GRANT ALL PRIVILEGES ON ${DB_NAME}.* TO '${DB_USER}'@'%' ;" >> msql_db.sql && \
 echo "FLUSH PRIVILEGES;" >> msql_db.sql && \
