@@ -23,6 +23,11 @@ services:
         DB_ROOT_PASS: ${DB_ROOT_PASS}
         DB_USER: ${DB_USER}
         DB_PASS: ${DB_PASS}
+    environment:
+      - DB_ROOT_PASS=${DB_ROOT_PASS}
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASS=${DB_PASS}
     volumes:
       - mariadb_data:/var/lib/mysql
     networks:

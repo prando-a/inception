@@ -4,13 +4,9 @@ all:
 	sudo mkdir -p /root/data/mariadb
 	sudo docker-compose -f ./srcs/docker-compose.yml up --build
 
-vol:
-	sudo docker-compose -f ./srcs/docker-compose.yml down --volumes
-
 down:
 	sudo docker-compose -f ./srcs/docker-compose.yml down
-	docker-compose up -d
 
-re: down vol all
+re: down all
 
-.PHONY: all down vol re
+.PHONY: all down re
