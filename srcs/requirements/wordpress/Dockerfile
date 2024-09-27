@@ -1,10 +1,5 @@
 FROM debian:bullseye
 
-ARG DB_NAME
-ARG DB_ROOT_PASS
-ARG DB_USER
-ARG DB_PASS
-
 RUN mkdir -p /var/www/html
 RUN apt-get -y update
 RUN apt-get -y upgrade
