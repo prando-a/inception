@@ -29,10 +29,10 @@ RUN service mariadb start && \
     echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '${DB_ROOT_PASS}' ;" >> msql_db.sql && \
     mariadb < msql_db.sql
 
-RUN chmod 777 init.sql
-RUN mv init.sql /run/mysqld/init.sql
+RUN chmod 777 msql_db.sql
+RUN mv msql_db.sql /run/mysqld/msql_db.sql
 RUN chown -R mysql:root /var/run/mysqld
 
 
-CMD ["mariadbd", "--user=mysql", "--init-file=/run/mysqld/init.sql"]
+CMD ["mariadbd", "--user=mysql", "--init-file=/run/mysqld/msql_db.sql"]
 
