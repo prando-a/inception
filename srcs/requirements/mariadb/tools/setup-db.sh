@@ -1,5 +1,9 @@
 #!/bin/sh
 
+echo "USERNAME: $DB_USER"
+echo "PASSWORD: $DB_PASS"
+echo "ROOT PASSWORD: $DB_ROOT_PASS"
+
 service mariadb start && \
 echo "CREATE DATABASE IF NOT EXISTS mariadb ;" > msql_db.sql && \
 echo "CREATE USER IF NOT EXISTS '${DB_USER}'@'%' IDENTIFIED BY '${DB_PASS}' ;" >> msql_db.sql && \
