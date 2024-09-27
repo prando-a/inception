@@ -20,6 +20,8 @@ fi
 
 #mv /var/www/html/wordpress/wp-config-sample.php /var/www/html/wordpress/wp-config.php
 
+echo DBUIDMEUIFHNDEUIFOEFHJOIWDJNWIODFJIOWJDWIOFNIOWJNDFIOPJPIDJPIJDWIPJDPIJDWPWJDPOIWXWSXIPNXSONEIOEDNHCIOPWEJNDIOPWEJDJIPOJDJIPJPIPIDPJPWIDJPWOKDDJKOPWDJPWIOJDPWDJWPODJWOPDJWOPIDJWPDJWIDJHOIDHOUIEFHEOUFHEOPFHEOPHFDUIOPEFHEIPHFIPEFHIPEFHEIPHDFUIODFJIEOPFJIPEFJEIPFJHEIPFJHIPEFJIPEFJEIPJFEIP
+
 sed -i "s/database_name_here/$DB_NAME/" /var/www/html/wordpress/wp-config.php
 sed -i "s/username_here/$DB_USER/" /var/www/html/wordpress/wp-config.php
 sed -i "s/password_here/$DB_ROOT_PASS/" /var/www/html/wordpress/wp-config.php
