@@ -41,7 +41,8 @@ services:
       args:
         WP_DB_HOST: ${WP_DB_HOST}
         DB_NAME: ${DB_NAME}
-        WP_DB_USER: ${WP_DB_USER}
+        DB_USER: ${DB_USER}
+        DB_ROOT_PASS: ${DB_ROOT_PASS}
         DB_PASS: ${DB_PASS}
         DOMAIN_NAME: ${DOMAIN_NAME}
     env_file:
