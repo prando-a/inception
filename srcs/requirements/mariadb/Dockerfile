@@ -1,11 +1,5 @@
 FROM debian:bullseye
 
-# Definir variables de entorno
-ARG DB_NAME
-ARG DB_ROOT_PASS
-ARG DB_USER
-ARG DB_PASS
-
 # Instalar MariaDB
 RUN apt-get update && apt-get install -y mariadb-server
 
