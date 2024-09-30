@@ -9,6 +9,7 @@ RUN apt-get update -y && \
     php7.4-gd \
     php7.4-mbstring \
     unzip \
+    wget \
     curl
 
 RUN wget -O /tmp/wordpress.tar.gz https://wordpress.org/latest.tar.gz
