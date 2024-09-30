@@ -18,6 +18,7 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+
 # Copy the custom my.cnf if needed
 COPY ./config/my.cnf /etc/mysql/my.cnf
 
@@ -27,13 +28,13 @@ RUN chown -R mysql:mysql /var/run/mysqld/
 # Expose the MySQL port
 EXPOSE 3306
 
-RUN service mariadb start
-RUN echo "CREATE NAME IF NOT EXISTS ${DB_NAME} ;" > msql_db.sql
-RUN echo "CREATE USER IF NOT EXISTS '${DB_USER}'@'%' IDENTIFIED BY '${DB_PASS}' ;" >> msql_db.sql
-RUN echo "GRANT ALL PRIVILEGES ON ${DB_NAME}.* TO '${DB_USER}'@'%' ;" >> msql_db.sql
-RUN echo "FLUSH PRIVILEGES;" >> msql_db.sql
-RUN echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '${DB_ROOT_PASS}' ;" >> msql_db.sql
-RUN mariadb < msql_db.sql
+RUN service mariadb start && \
+    echo "CREATE DATABASE IF NOT EXISTS ${DB_NAME} ;" > msql_db.sql && \
+    echo "CREATE USER IF NOT EXISTS '${DB_USER}'@'%' IDENTIFIED BY '${DB_PASS}' ;" >> msql_db.sql && \
+    echo "GRANT ALL PRIVILEGES ON ${DB_NAME}.* TO '${DB_USER}'@'%' ;" >> msql_db.sql && \
+    echo "FLUSH PRIVILEGES;" >> msql_db.sql && \
+    echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '${DB_ROOT_PASS}' ;" >> msql_db.sql && \
+    mariadb < msql_db.sql
 
 
 # Start MariaDB service
