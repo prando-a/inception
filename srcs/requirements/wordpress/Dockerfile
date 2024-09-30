@@ -26,4 +26,4 @@ RUN chmod +x setup-wp.sh
 EXPOSE 9000
 
 # Inicia PHP-FPM
-CMD ["/scripts/wordpress.sh"]
+CMD ["/scripts/setup-wp.sh"]
