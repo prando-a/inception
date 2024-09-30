@@ -1,11 +1,15 @@
 FROM debian:bullseye
 
 RUN mkdir -p /var/www/html
-RUN apt-get -y update
-RUN apt-get -y upgrade
-RUN apt-get -y install php php-mysql php-fpm
-RUN apt-get -y install mariadb-client
-RUN apt-get -y install wget tar
+RUN apt-get update -y && \
+    apt-get install -y \
+    php7.4-fpm \
+    php7.4-mysql \
+    php7.4-curl \
+    php7.4-gd \
+    php7.4-mbstring \
+    unzip \
+    curl
 
 RUN wget -O /tmp/wordpress.tar.gz https://wordpress.org/latest.tar.gz
 RUN tar -xzf /tmp/wordpress.tar.gz -C /var/www/html
