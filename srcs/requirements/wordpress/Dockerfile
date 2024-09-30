@@ -18,6 +18,7 @@ RUN mkdir -p /var/www/html && chown wp_user:wp_group /var/www/html
 RUN mkdir /scripts
 
 COPY tools/setup-wp.sh /scripts/setup-wp.sh
+COPY tools/title.txt /scripts/title.txt
 COPY config/php-fpm.conf /etc/php/7.4/fpm/php-fpm.conf
 COPY config/wp-config.php /scripts/wp-config.php
 
