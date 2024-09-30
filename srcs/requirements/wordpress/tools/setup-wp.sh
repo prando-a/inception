@@ -1,7 +1,5 @@
 #!/bin/bash
 
-if [ ! -f /var/www/html/wp-config.php ]; then
-
 curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 chmod +x wp-cli.phar
 mv wp-cli.phar /usr/local/bin/wp
@@ -17,8 +15,6 @@ wp core install --allow-root --path=/var/www/html \
 	--admin_user=$WP_ADMIN --admin_password=$WP_ADMIN_PASS \
 	--admin_email=$WP_ADMIN_MAIL
 wp user create $DB_USER $WP_USER_MAIL --user_pass=$DB_PASS --allow-root --role=author --path=/var/www/html
-
-fi
 
 chown -R wp_user:wp_group /var/www/html && chmod -R 775 /var/www/html
 php-fpm7.4 -y /etc/php/7.4/fpm/php-fpm.conf -F
