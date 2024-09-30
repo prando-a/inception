@@ -18,7 +18,7 @@ if [ ! -f /var/www/html/wordpress/wp-load.php ]; then
     wp core download --allow-root --path=/var/www/html/wordpress
 fi
 
-mv /var/www/html/wordpress/wp-config-sample.php /var/www/html/wordpress/wp-config.php
+mv ./wp-config.php /var/www/html/wordpress/wp-config.php
 
 echo "$DB_NAME\t$DB_USER\t$DB_ROOT_PASS\t$WP_ADMIN_MAIL FINISH"
 

@@ -12,6 +12,8 @@ RUN tar -xzf /tmp/wordpress.tar.gz -C /var/www/html
 
 COPY /tools/setup-wp.sh .
 
+COPY /config/wp-config.php .
+
 RUN chmod +x setup-wp.sh
 
 EXPOSE 9000
