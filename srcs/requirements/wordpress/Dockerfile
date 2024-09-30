@@ -1,6 +1,5 @@
 FROM debian:bullseye
 
-RUN mkdir -p /var/www/html
 RUN apt-get update -y && \
     apt-get install -y \
     php7.4-fpm \
@@ -11,9 +10,6 @@ RUN apt-get update -y && \
     unzip \
     wget \
     curl
-
-RUN wget -O /tmp/wordpress.tar.gz https://wordpress.org/latest.tar.gz
-RUN tar -xzf /tmp/wordpress.tar.gz -C /var/www/html
 
 RUN useradd wp_user && groupadd wp_group && usermod -aG wp_group wp_user
 
