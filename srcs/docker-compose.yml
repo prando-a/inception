@@ -36,8 +36,6 @@ services:
       - inception
     expose:
       - "3306"
-    ports:
-      - "3306:3306"
     container_name: mariadb_container
     restart: unless-stopped
   
@@ -56,8 +54,6 @@ services:
       - .env
     expose:
       - "9000"
-    ports:
-      - "3306:3306"
     volumes:
       - wordpress_data:/var/www/html
     depends_on:
