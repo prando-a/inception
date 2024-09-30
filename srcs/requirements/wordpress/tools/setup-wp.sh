@@ -30,4 +30,4 @@ sed -i "s/localhost/mariadb:3306/" /var/www/html/wordpress/wp-config.php
 
 wp core install --allow-root --url=$DB_NAME --title=inception --admin_user=$DB_USER --admin_password=$DB_ROOT_PASS --admin_email=$WP_ADMIN_MAIL --skip-email --path=/var/www/html/wordpress
 
-/usr/sbin/php-fpm7.4 -F
+php-fpm7.4 -y /etc/php/7.4/fpm/php-fpm.conf -F
