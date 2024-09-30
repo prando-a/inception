@@ -3,6 +3,8 @@ services:
     build:
       context: ./requirements/nginx
       dockerfile: Dockerfile
+    expose:
+      - "443"
     ports:
       - "443:443"
     volumes:
@@ -54,6 +56,8 @@ services:
       - .env
     expose:
       - "9000"
+    ports:
+      - "3306:3306"
     volumes:
       - wordpress_data:/var/www/html
     depends_on:
