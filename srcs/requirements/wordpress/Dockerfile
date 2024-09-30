@@ -15,9 +15,11 @@ RUN useradd wp_user && groupadd wp_group && usermod -aG wp_group wp_user
 
 RUN mkdir -p /var/www/html && chown wp_user:wp_group /var/www/html
 
-COPY /tools/setup-wp.sh .
+RUN mkdir /scripts
+
+COPY /tools/setup-wp.sh /scripts/setup-wp.sh
 COPY config/php-fpm.conf /etc/php/7.4/fpm/php-fpm.conf
-COPY /config/wp-config.php .
+COPY /config/wp-config.php /scripts/wp-config.php
 
 RUN chmod +x setup-wp.sh
 
