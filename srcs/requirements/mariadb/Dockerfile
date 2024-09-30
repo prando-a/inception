@@ -1,22 +1,41 @@
+# Dockerfile
 FROM debian:bullseye
 
-# Instalar MariaDB
-RUN apt-get update && apt-get install -y mariadb-server
+ARG DB_NAME
+ARG DB_USER
+ARG DB_PASS
+ARG DB_ROOT_PASS
 
-# Crear directorios necesarios
-RUN mkdir -p /docker-entrypoint-initdb.d
+ENV DB_NAME=$DB_NAME \
+    DB_USER=$DB_USER \
+    DB_PASS=$DB_PASS \
+    DB_ROOT_PASS=$DB_ROOT_PASS
+
+# Install MariaDB
+RUN apt-get update && \
+    apt upgrade -y && \
+    apt-get install -y mariadb-server && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Copy the custom my.cnf if needed
+COPY ./config/my.cnf /etc/mysql/my.cnf
+
 RUN mkdir -p /var/run/mysqld/
 RUN chown -R mysql:mysql /var/run/mysqld/
-RUN mkdir -p /etc/mysql
 
+# Expose the MySQL port
 EXPOSE 3306
 
-# Copiar configuración personalizada de MariaDB
-COPY ./config/my.cnf /etc/mysql/maria.conf.d
+RUN service mariadb start
+RUN echo "CREATE NAME IF NOT EXISTS ${DB_NAME} ;" > msql_db.sql
+RUN echo "CREATE USER IF NOT EXISTS '${DB_USER}'@'%' IDENTIFIED BY '${DB_PASS}' ;" >> msql_db.sql
+RUN echo "GRANT ALL PRIVILEGES ON ${DB_NAME}.* TO '${DB_USER}'@'%' ;" >> msql_db.sql
+RUN echo "FLUSH PRIVILEGES;" >> msql_db.sql
+RUN echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '${DB_ROOT_PASS}' ;" >> msql_db.sql
+RUN mariadb < msql_db.sql
 
-COPY ./tools/setup-db.sh .
 
-RUN chmod +x setup-db.sh
-
-CMD ["./setup-db.sh"]
+# Start MariaDB service
+CMD ["mysqld"]
 
