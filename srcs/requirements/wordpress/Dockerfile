@@ -21,7 +21,7 @@ COPY tools/setup-wp.sh /scripts/setup-wp.sh
 COPY config/php-fpm.conf /etc/php/7.4/fpm/php-fpm.conf
 COPY config/wp-config.php /scripts/wp-config.php
 
-RUN chmod +x setup-wp.sh
+RUN chmod +x /scripts/setup-wp.sh
 
 EXPOSE 9000
 
