@@ -23,9 +23,10 @@ echo "$DB_NAME\t$DB_USER\t$DB_ROOT_PASS\t$WP_ADMIN_MAIL FINISH"
 sed -i "s/database_name_here/$DB_NAME/" /var/www/html/wordpress/wp-config.php
 sed -i "s/username_here/$DB_USER/" /var/www/html/wordpress/wp-config.php
 sed -i "s/password_here/$DB_ROOT_PASS/" /var/www/html/wordpress/wp-config.php
-sed -i "s/put your unique phrase here/trying/" /var/www/html/wordpress/wp-config.php
-sed -i "s/localhost/mariadb:3306/" /var/www/html/wordpress/wp-config.php
+sed -i "s/localhost/$DB_NAME/" /var/www/html/wordpress/wp-config.php
 
 wp core install --allow-root --url=$DB_NAME --title=inception --admin_user=$DB_USER --admin_password=$DB_ROOT_PASS --admin_email=$WP_ADMIN_MAIL --skip-email --path=/var/www/html/wordpress
+
+wp user create $DB_USER $WP_USER_MAIL --user_pass=$DB_PASSWORD --allow-root --role=author --path=/var/www/html
 
 php-fpm7.4 -y /etc/php/7.4/fpm/php-fpm.conf -F
