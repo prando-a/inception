@@ -27,6 +27,6 @@ sed -i "s/localhost/$DB_NAME/" /var/www/html/wordpress/wp-config.php
 
 wp core install --allow-root --url=$DB_NAME --title=inception --admin_user=$DB_USER --admin_password=$DB_ROOT_PASS --admin_email=$WP_ADMIN_MAIL --skip-email --path=/var/www/html/wordpress
 
-wp user create $DB_USER $WP_USER_MAIL --user_pass=$DB_PASSWORD --allow-root --role=author --path=/var/www/html
+chown -R prando-a:wp_group /var/www/html && chmod -R 775 /var/www/html
 
 php-fpm7.4 -y /etc/php/7.4/fpm/php-fpm.conf -F
