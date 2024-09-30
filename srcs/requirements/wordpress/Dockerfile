@@ -10,6 +10,10 @@ RUN apt-get -y install wget tar
 RUN wget -O /tmp/wordpress.tar.gz https://wordpress.org/latest.tar.gz
 RUN tar -xzf /tmp/wordpress.tar.gz -C /var/www/html
 
+RUN useradd prando-a && groupadd wp_group && usermod -aG wp_group prando-a
+
+RUN mkdir -p /var/www/html && chown prando-a:wp_group /var/www/html
+
 COPY /tools/setup-wp.sh .
 
 COPY /config/wp-config.php .
