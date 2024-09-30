@@ -1,11 +1,5 @@
 #!/bin/sh
 
-mkdir -p /run/php
-
-chown -R www-data.www-data /var/www/html
-
-chmod -R 755 /var/www/html/wordpress
-
 wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 
 chmod +x wp-cli.phar
@@ -27,6 +21,7 @@ sed -i "s/localhost/$DB_NAME/" /var/www/html/wp-config.php
 
 wp core install --allow-root --url=$DOMAIN_NAME --title=inception --admin_user=$DB_USER --admin_password=$DB_ROOT_PASS --admin_email=$WP_ADMIN_MAIL --path=/var/www/html
 
-chown -R prando-a:wp_group /var/www/html && chmod -R 775 /var/www/html
+chmod -R 755 /var/www/html
+chown -R wp_user:wp_group /var/www/html && chmod -R 775 /var/www/html
 
 php-fpm7.4 -y /etc/php/7.4/fpm/php-fpm.conf -F

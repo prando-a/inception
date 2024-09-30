@@ -15,9 +15,9 @@ RUN apt-get update -y && \
 RUN wget -O /tmp/wordpress.tar.gz https://wordpress.org/latest.tar.gz
 RUN tar -xzf /tmp/wordpress.tar.gz -C /var/www/html
 
-RUN useradd prando-a && groupadd wp_group && usermod -aG wp_group prando-a
+RUN useradd wp_user && groupadd wp_group && usermod -aG wp_group wp_user
 
-RUN mkdir -p /var/www/html && chown prando-a:wp_group /var/www/html
+RUN mkdir -p /var/www/html && chown wp_user:wp_group /var/www/html
 
 COPY /tools/setup-wp.sh .
 COPY config/php-fpm.conf /etc/php/7.4/fpm/php-fpm.conf
