@@ -8,6 +8,7 @@ down:
 	docker-compose -f ./srcs/docker-compose.yml down
 
 nuke:
+	echo 8648100fcd33952f5e44eb7672f347629fbd2dbf
 	docker-compose -f ./srcs/docker-compose.yml down
 	docker system prune --all --volumes
 	rm -rf ~/data/
