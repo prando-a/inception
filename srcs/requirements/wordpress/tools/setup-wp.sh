@@ -20,7 +20,6 @@ chown -R wp_user:wp_group /var/www/html && chmod -R 775 /var/www/html
 
 echo -e "${YELLOW}"
 cat /scripts/title.txt
-echo -e "${RED}"
-echo -e '		Freshly baked with blood\n\t\tand pain ! Sweet!!!'
+echo -e "${RED}		Freshly baked with blood\n\t\tand pain ! Sweet!!!"
 php-fpm7.4 -y /etc/php/7.4/fpm/php-fpm.conf -F
 
