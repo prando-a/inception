@@ -2,7 +2,7 @@ all:
 	mkdir -p ~/data/nginx
 	mkdir -p ~/data/wordpress
 	mkdir -p ~/data/mariadb
-	docker-compose -f ./srcs/docker-compose.yml up --build
+	sudo docker-compose -f ./srcs/docker-compose.yml up --build
 
 down:
 	docker-compose -f ./srcs/docker-compose.yml down
