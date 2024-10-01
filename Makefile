@@ -9,8 +9,9 @@ down:
 
 nuke:
 	docker-compose -f ./srcs/docker-compose.yml down
+	docker system prune --all --volumes
 	rm -rf ~/data/
 
-re: down all
+re: nuke all
 
-.PHONY: all down re
+.PHONY: all down nuke re
