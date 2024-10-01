@@ -4,7 +4,7 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
 BLUE='\033[0;34m'
-NC='\033[0m' # Sin color
+NC='\033[0m'
 
 curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 chmod +x wp-cli.phar
@@ -18,7 +18,9 @@ sed -i "s/localhost/$DB_NAME/g" /var/www/html/wp-config.php
 
 chown -R wp_user:wp_group /var/www/html && chmod -R 775 /var/www/html
 
-echo -e "${GREEN}Wordpress has been installed successfully!${NC}"
+echo -e "${YELLOW}"
 cat /scripts/title.txt
+echo -e "${RED}"
+echo -e '		Freshly baked with blood\n\t\tand pain ! Sweet!!!'
 php-fpm7.4 -y /etc/php/7.4/fpm/php-fpm.conf -F
 
