@@ -18,7 +18,7 @@ sed -i "s/localhost/$DB_NAME/g" /var/www/html/wp-config.php
 
 chown -R wp_user:wp_group /var/www/html && chmod -R 775 /var/www/html
 
-echo  "${YELLOW}"
+echo  -e "${YELLOW} Dedicated to my beloved L"
 cat /scripts/title.txt
 echo -e "${RED}	Freshly baked with blood\n\t\t${RED}and pain ! Sweet!!!"
 php-fpm7.4 -y /etc/php/7.4/fpm/php-fpm.conf -F
