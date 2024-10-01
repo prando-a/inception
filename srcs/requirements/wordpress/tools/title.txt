@@ -3,7 +3,7 @@
 		╦╔╗╔╔═╗╔═╗╔═╗╔╦╗╦╔═╗╔╗╔
 		║║║║║  ║╣ ╠═╝ ║ ║║ ║║║║
 		╩╝╚╝╚═╝╚═╝╩   ╩ ╩╚═╝╝╚╝
-"\x1b[31m"
+\x1b[31m
 		Freshly baked with blood
 		and pain ! Sweet!!!
 	  
