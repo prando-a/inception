@@ -1,3 +1,4 @@
+# Dockerfile
 FROM debian:bullseye
 
 ARG DB_NAME
@@ -10,17 +11,21 @@ ENV DB_NAME=$DB_NAME \
     DB_PASS=$DB_PASS \
     DB_ROOT_PASS=$DB_ROOT_PASS
 
+# Install MariaDB
 RUN apt-get update && \
     apt upgrade -y && \
     apt-get install -y mariadb-server && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+
+# Copy the custom my.cnf if needed
 COPY ./config/my.cnf /etc/mysql/my.cnf
 
 RUN mkdir -p /var/run/mysqld/
 RUN chown -R mysql:mysql /var/run/mysqld/
 
+# Expose the MySQL port
 EXPOSE 3306
 
 RUN service mariadb start && \
@@ -31,5 +36,7 @@ RUN service mariadb start && \
     echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '${DB_ROOT_PASS}' ;" >> msql_db.sql && \
     mariadb < msql_db.sql
 
+
+# Start MariaDB service
 CMD ["mysqld"]
 
