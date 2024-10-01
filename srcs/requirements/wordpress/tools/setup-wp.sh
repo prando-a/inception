@@ -22,7 +22,7 @@ wp core install --allow-root --path=/var/www/html \
 	--admin_user=$WP_ADMIN --admin_password=$WP_ADMIN_PASS \
 	--admin_email=$WP_ADMIN_MAIL
 
-#wp user create $DB_USER $WP_USER_MAIL --user_pass=$DB_PASS --allow-root --role=author --path=/var/www/html
+wp user create $DB_USER $WP_USER_MAIL --user_pass=$DB_PASS --allow-root --role=author --path=/var/www/html
 
 chown -R wp_user:wp_group /var/www/html && chmod -R 775 /var/www/html
 
